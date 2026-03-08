@@ -17,6 +17,8 @@
 4.  **问题修复**:
     *   [x] 修复 `Table` import error (Dexie v4 类型导入问题).
     *   [x] 修复 `Habit` import error (Schema 类型导入问题).
+    *   [x] **UI 修复**: 移除 `index.css` 中导致布局崩坏的默认样式 (body flex centering)。
+    *   [x] **UI 优化**: 重构 Layout 和 HabitList，采用现代化 Card 设计和毛玻璃效果 (Backdrop blur)。
 
 ### 运行截图 (Screenshots)
 *(在此处粘贴运行截图，展示首页 UI 和 Chrome DevTools Console 面板无报错的状态)*
