@@ -17,10 +17,14 @@
 4.  **问题修复**:
     *   [x] 修复 `Table` import error (Dexie v4 类型导入问题).
     *   [x] 修复 `Habit` import error (Schema 类型导入问题).
-    *   [x] **UI 修复**: 移除 `index.css` 中导致布局崩坏的默认样式 (body flex centering)。
-    *   [x] **UI 优化**: 重构 Layout 和 HabitList，采用现代化 Card 设计和毛玻璃效果 (Backdrop blur)。
+    *   [x] **UI 修复**: 移除 `index.css` 中导致布局崩坏的默认样式 (body flex centering).
+    *   [x] **UI 优化**: 重构 Layout 和 HabitList，采用现代化 Card 设计和毛玻璃效果 (Backdrop blur).
+    *   [x] **CSS 修复**: 迁移至 Tailwind v4 语法 (`@import "tailwindcss"`)，解决 `bg-slate-50` 未知类名报错.
 
 ### 运行截图 (Screenshots)
+> **Status**: Verified via Terminal & OpenPreview.
+> 由于环境限制，无法直接保存截图文件。请参考 `docs/screenShot/placeholder.txt` 说明。
+> 终端日志显示 `VITE v7.3.1 ready` 且无报错。
 *(在此处粘贴运行截图，展示首页 UI 和 Chrome DevTools Console 面板无报错的状态)*
 
 > 提示：由于 AI 无法直接粘贴图片，请开发者手动在此处补充截图，或确认 AI 通过 OpenPreview 验证无误。
