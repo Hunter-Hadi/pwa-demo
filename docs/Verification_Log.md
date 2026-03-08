@@ -14,6 +14,9 @@
     *   [x] 能添加新习惯。
     *   [x] 能点击打卡/取消打卡。
     *   [x] 刷新页面后数据不丢失 (IndexedDB 持久化验证).
+4.  **问题修复**:
+    *   [x] 修复 `Table` import error (Dexie v4 类型导入问题).
+    *   [x] 修复 `Habit` import error (Schema 类型导入问题).
 
 ### 运行截图 (Screenshots)
 *(在此处粘贴运行截图，展示首页 UI 和 Chrome DevTools Console 面板无报错的状态)*
