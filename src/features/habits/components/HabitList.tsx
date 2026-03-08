@@ -3,7 +3,7 @@ import { useHabits } from '../hooks/useHabits';
 import { format } from 'date-fns';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../../db/db';
-import { Plus, Check, Trash2, Trophy } from 'lucide-react';
+import { Plus, Check, Trash2, Trophy, Sparkles } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export function HabitList() {
@@ -30,78 +30,90 @@ export function HabitList() {
     }
   };
 
-  if (!habits) return <div className="flex justify-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>;
+  if (!habits) return (
+    <div className="flex justify-center items-center h-64">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+    </div>
+  );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <header className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Today's Goals</h2>
-          <p className="text-sm text-gray-500">{format(today, 'EEEE, MMMM do')}</p>
+          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Today's Goals</h2>
+          <p className="text-sm text-slate-500 font-medium">{format(today, 'EEEE, MMMM do')}</p>
         </div>
         <button 
           onClick={() => setIsAdding(!isAdding)}
-          className="p-3 bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-xl hover:scale-105 transition-all active:scale-95"
+          className="p-3 bg-indigo-600 text-white rounded-2xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-xl hover:scale-105 transition-all active:scale-95"
         >
           <Plus size={24} />
         </button>
       </header>
 
       {/* Progress Card */}
-      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-6 text-white shadow-lg shadow-indigo-200">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <p className="text-indigo-100 text-sm font-medium">Daily Progress</p>
-            <h3 className="text-3xl font-bold mt-1">
-              {habits.length > 0 ? Math.round((completedHabitIds.size / habits.length) * 100) : 0}%
-            </h3>
-          </div>
-          <div className="p-2 bg-white/20 rounded-xl backdrop-blur-sm">
-            <Trophy className="w-6 h-6 text-white" />
-          </div>
+      <div className="bg-gradient-to-br from-indigo-500 to-violet-600 rounded-3xl p-6 text-white shadow-xl shadow-indigo-200 relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-4 opacity-10">
+          <Sparkles size={120} />
         </div>
-        <div className="w-full bg-black/20 rounded-full h-2 overflow-hidden">
-          <div 
-            className="bg-white h-full rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${habits.length > 0 ? (completedHabitIds.size / habits.length) * 100 : 0}%` }}
-          />
+        
+        <div className="relative z-10">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <p className="text-indigo-100 text-sm font-medium mb-1">Daily Progress</p>
+              <h3 className="text-4xl font-bold tracking-tight">
+                {habits.length > 0 ? Math.round((completedHabitIds.size / habits.length) * 100) : 0}%
+              </h3>
+            </div>
+            <div className="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm border border-white/10">
+              <Trophy className="w-6 h-6 text-white" />
+            </div>
+          </div>
+          
+          <div className="w-full bg-black/20 rounded-full h-2.5 overflow-hidden backdrop-blur-sm">
+            <div 
+              className="bg-white h-full rounded-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+              style={{ width: `${habits.length > 0 ? (completedHabitIds.size / habits.length) * 100 : 0}%` }}
+            />
+          </div>
+          <p className="text-xs text-indigo-100 mt-3 font-medium flex items-center gap-1">
+            <Check size={12} />
+            {completedHabitIds.size} of {habits.length} habits completed
+          </p>
         </div>
-        <p className="text-xs text-indigo-100 mt-3">
-          {completedHabitIds.size} of {habits.length} habits completed
-        </p>
       </div>
 
       {isAdding && (
-        <form onSubmit={handleAdd} className="animate-in slide-in-from-top-4 fade-in duration-200">
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+        <form onSubmit={handleAdd} className="animate-in slide-in-from-top-4 fade-in duration-300">
+          <div className="bg-white rounded-2xl p-5 shadow-lg shadow-slate-200/50 border border-slate-100">
             <input
               type="text"
               value={newHabitTitle}
               onChange={(e) => setNewHabitTitle(e.target.value)}
               placeholder="What do you want to achieve?"
-              className="w-full text-lg font-medium placeholder:text-gray-300 border-none focus:ring-0 p-0 mb-4 text-gray-900"
+              className="w-full text-lg font-medium placeholder:text-slate-300 border-none focus:ring-0 p-0 mb-6 text-slate-900 bg-transparent"
               autoFocus
             />
             <div className="flex justify-end gap-3">
               <button 
                 type="button" 
                 onClick={() => setIsAdding(false)}
-                className="px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 rounded-xl transition-colors"
+                className="px-5 py-2.5 text-sm font-semibold text-slate-500 hover:bg-slate-50 rounded-xl transition-colors"
               >
                 Cancel
               </button>
               <button 
                 type="submit"
-                className="px-6 py-2 text-sm font-medium bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors shadow-sm"
+                className="px-6 py-2.5 text-sm font-semibold bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all shadow-md shadow-indigo-200 hover:shadow-lg active:scale-95"
               >
-                Create
+                Create Goal
               </button>
             </div>
           </div>
         </form>
       )}
 
-      <div className="grid gap-3">
+      <div className="grid gap-3 pb-4">
         {habits.map(habit => {
           const isCompleted = completedHabitIds.has(habit.id!);
           
@@ -109,37 +121,52 @@ export function HabitList() {
             <div 
               key={habit.id} 
               className={clsx(
-                "group relative flex items-center p-4 bg-white rounded-2xl shadow-sm border transition-all duration-300",
+                "group relative flex items-center p-4 bg-white rounded-2xl border transition-all duration-300",
                 isCompleted 
-                  ? "border-green-100 bg-green-50/50" 
-                  : "border-gray-100 hover:border-gray-200 hover:shadow-md"
+                  ? "border-emerald-100 bg-emerald-50/30 shadow-none" 
+                  : "border-slate-100 shadow-sm hover:shadow-md hover:border-indigo-100 hover:-translate-y-0.5"
               )}
             >
               <button
                 onClick={() => toggleHabit(habit.id!, today)}
                 className={clsx(
-                  "flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center mr-4 transition-all duration-300",
+                  "flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center mr-4 transition-all duration-300 animate-bounce-click",
                   isCompleted 
-                    ? "bg-green-500 text-white shadow-green-200 shadow-md scale-100" 
-                    : "bg-gray-100 text-gray-300 hover:bg-blue-100 hover:text-blue-500 scale-95"
+                    ? "bg-emerald-500 text-white shadow-lg shadow-emerald-200" 
+                    : "bg-slate-100 text-slate-300 hover:bg-indigo-50 hover:text-indigo-500"
                 )}
               >
-                <Check size={24} className={clsx("transition-transform duration-300", isCompleted ? "scale-100" : "scale-0")} />
+                <Check 
+                  size={28} 
+                  strokeWidth={3}
+                  className={clsx(
+                    "transition-all duration-300", 
+                    isCompleted ? "scale-100 opacity-100" : "scale-50 opacity-0"
+                  )} 
+                />
               </button>
               
-              <div className="flex-grow min-w-0">
+              <div className="flex-grow min-w-0 py-1">
                 <h3 className={clsx(
-                  "font-semibold text-lg truncate transition-all duration-300",
-                  isCompleted ? "text-gray-400 line-through decoration-gray-300" : "text-gray-900"
+                  "font-bold text-lg truncate transition-all duration-300 mb-0.5",
+                  isCompleted ? "text-slate-400 line-through decoration-slate-300" : "text-slate-800"
                 )}>
                   {habit.title}
                 </h3>
-                <p className="text-xs text-gray-400 font-medium tracking-wide">DAILY GOAL</p>
+                <div className="flex items-center gap-2">
+                  <span className={clsx(
+                    "text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider",
+                    isCompleted ? "bg-emerald-100 text-emerald-600" : "bg-indigo-50 text-indigo-600"
+                  )}>
+                    Daily
+                  </span>
+                  <span className="text-xs text-slate-400 font-medium">🔥 3 days streak</span>
+                </div>
               </div>
 
               <button 
                 onClick={() => deleteHabit(habit.id!)}
-                className="absolute right-4 opacity-0 group-hover:opacity-100 p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
+                className="absolute right-4 opacity-0 group-hover:opacity-100 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
                 aria-label="Delete habit"
               >
                 <Trash2 size={18} />
@@ -149,13 +176,13 @@ export function HabitList() {
         })}
         
         {habits.length === 0 && !isAdding && (
-          <div className="text-center py-12">
-            <div className="inline-flex justify-center items-center w-16 h-16 bg-gray-100 rounded-full mb-4">
-              <Trophy className="w-8 h-8 text-gray-400" />
+          <div className="text-center py-16 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="inline-flex justify-center items-center w-20 h-20 bg-indigo-50 rounded-full mb-6 ring-8 ring-indigo-50/50">
+              <Trophy className="w-10 h-10 text-indigo-400" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-1">No habits yet</h3>
-            <p className="text-gray-500 text-sm max-w-xs mx-auto">
-              Start small by adding just one habit you want to stick to.
+            <h3 className="text-xl font-bold text-slate-900 mb-2">Start your journey</h3>
+            <p className="text-slate-500 text-sm max-w-xs mx-auto leading-relaxed">
+              Small habits lead to big changes. Add your first goal today.
             </p>
           </div>
         )}

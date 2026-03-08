@@ -57,9 +57,10 @@ src/
 ## 5. 工作流指令 (Workflow Instructions)
 当用户要求你开发某个功能时：
 1.  **Check Plan**: 首先读取 `docs/Iteration_Plan.md` 确认当前迭代目标。
-2.  **Check Schema**: 检查 `src/db/schema.ts` 是否支持新功能，若不支持，先修改 Schema。
-3.  **Implement**: 编写代码，遵循上述编码原则。
-4.  **Verify**: 提示用户如何验证（例如："请断网测试打卡功能"）。
+2.  **UI Design First (NEW)**: 如果涉及界面开发，必须先查阅或更新 `docs/UI_Design_Spec.md`，确认设计规范（配色、布局、交互）后再写代码。禁止“凭感觉”写样式。
+3.  **Check Schema**: 检查 `src/db/schema.ts` 是否支持新功能，若不支持，先修改 Schema。
+4.  **Implement**: 编写代码，遵循上述编码原则。
+5.  **Verify**: 提示用户如何验证（例如："请断网测试打卡功能"）。
 
 ## 6. 迭代验证与同步 (Iteration Verification & Sync)
 *   **Verify After Iteration**: 每次迭代完成后，必须打开开发环境网址进行实际验证。
