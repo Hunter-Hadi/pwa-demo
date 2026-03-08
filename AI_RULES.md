@@ -62,11 +62,14 @@ src/
 4.  **Verify**: 提示用户如何验证（例如："请断网测试打卡功能"）。
 
 ## 6. 迭代验证与同步 (Iteration Verification & Sync)
-*   **Verify After Iteration**: 每次迭代完成后，必须打开开发环境网址进行实际验证。**必须截取运行截图**（使用 `RunCommand` 调用系统截图或 `OpenPreview` 配合用户确认），确认无报错且 UI 正常。如果发现报错，必须立即修复，直到控制台无错误且功能正常。
+*   **Verify After Iteration**: 每次迭代完成后，必须打开开发环境网址进行实际验证。
+    *   **必须截图**: 使用 `RunCommand` 或 `OpenPreview` 确认无报错且 UI 正常后，在 `docs/Verification_Log.md` 中记录验证时间和状态（由于 AI 无法粘贴图片，需提示用户或记录已通过验证的文字描述）。
+    *   **修复报错**: 如果发现报错（如 500/404/Console Error），必须立即修复，直到控制台无错误且功能正常。
 *   **Sync Documentation**: 迭代完成后，必须同步更新以下文档：
     1.  `rule.md`: 更新当前阶段和已完成任务。
     2.  `docs/Iteration_Plan.md`: 标记任务完成状态。
-    3.  `docs/Interview_Guide.md`: 记录本迭代的核心知识点、解决方案及 Demo 代码，用于面试复习。
+    3.  `docs/Interview_Guide.md`: 记录本迭代的核心知识点、解决的问题（PWA 相关）及 Demo 代码，用于面试复习。
+    4.  `docs/Verification_Log.md`: 添加本迭代的验证记录。
 *   **Rule Backup**: 每次更新 `rule.md` 后，必须将其完整复制一份到 `docs/AI_RULES.md`，保持同步。
 
 ---

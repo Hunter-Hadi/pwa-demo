@@ -1,5 +1,5 @@
 import Dexie, { Table } from 'dexie';
-import { Habit, Log } from './schema';
+import type { Habit, Log } from './schema';
 
 export class LifeSyncDB extends Dexie {
   habits!: Table<Habit>;

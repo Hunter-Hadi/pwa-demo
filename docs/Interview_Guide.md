@@ -6,10 +6,23 @@
 
 ## 迭代 1: Web App 基础 (MVP)
 
-### 1. 核心任务
-*   构建 React + TypeScript + Vite 项目骨架。
-*   集成 Tailwind CSS 实现移动端优先布局。
-*   使用 Dexie.js (IndexedDB) 实现完全离线的数据存储。
+### 1. 核心任务与解决的问题
+本迭代构建了一个“单机可用”的 Web App，主要解决了以下问题，为后续升级 PWA 打下基础：
+
+*   **问题 A: 数据如何完全离线存储？**
+    *   **背景**: 传统 Web App 依赖服务器数据库，断网即瘫痪。LocalStorage 容量小且同步阻塞 UI。
+    *   **解决**: 引入 **IndexedDB** (通过 Dexie.js 封装)。实现了 GB 级别的本地存储，且读写操作全部异步，不阻塞主线程渲染。
+    *   **价值**: 这是 PWA "Offline First" (离线优先) 的数据层基石。
+
+*   **问题 B: 本地数据变化如何实时驱动 UI 更新？**
+    *   **背景**: IndexedDB 是被动存储，数据变了 UI 不会自动刷新（不像 Redux/State）。
+    *   **解决**: 使用 **LiveQuery** 模式 (`dexie-react-hooks`)。
+    *   **价值**: 实现了类似 Vue/MobX 的响应式体验，但数据源是数据库。用户打卡后，无需手动操作 DOM 或维护额外的 React State，列表自动更新。
+
+*   **问题 C: 移动端体验如何接近原生 App？**
+    *   **背景**: 桌面端网页在手机上字太小、点击区域难点。
+    *   **解决**: 采用 **Mobile-First** CSS 策略 (Tailwind)。
+    *   **价值**: 确保点击区域 >44px，布局自适应，为后续 "Add to Home Screen" 提供原生级的 UI 体验。
 
 ### 2. 关键知识点 (Key Concepts)
 
