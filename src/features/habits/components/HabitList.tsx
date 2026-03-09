@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useHabits } from '../hooks/useHabits';
 import { format } from 'date-fns';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../../db/db';
-import { Plus, Check, Trash2, Trophy, Sparkles } from 'lucide-react';
+import { Plus, Check, Trash2, Trophy } from 'lucide-react';
 import { clsx } from 'clsx';
+import { StatsCard } from '../../stats/components/StatsCard';
 
 export function HabitList() {
   const { habits, addHabit, toggleHabit, deleteHabit } = useHabits();
@@ -52,36 +53,7 @@ export function HabitList() {
       </header>
 
       {/* Progress Card */}
-      <div className="bg-gradient-to-br from-indigo-500 to-violet-600 rounded-3xl p-6 text-white shadow-xl shadow-indigo-200 relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-4 opacity-10">
-          <Sparkles size={120} />
-        </div>
-        
-        <div className="relative z-10">
-          <div className="flex justify-between items-start mb-4">
-            <div>
-              <p className="text-indigo-100 text-sm font-medium mb-1">Daily Progress</p>
-              <h3 className="text-4xl font-bold tracking-tight">
-                {habits.length > 0 ? Math.round((completedHabitIds.size / habits.length) * 100) : 0}%
-              </h3>
-            </div>
-            <div className="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm border border-white/10">
-              <Trophy className="w-6 h-6 text-white" />
-            </div>
-          </div>
-          
-          <div className="w-full bg-black/20 rounded-full h-2.5 overflow-hidden backdrop-blur-sm">
-            <div 
-              className="bg-white h-full rounded-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-              style={{ width: `${habits.length > 0 ? (completedHabitIds.size / habits.length) * 100 : 0}%` }}
-            />
-          </div>
-          <p className="text-xs text-indigo-100 mt-3 font-medium flex items-center gap-1">
-            <Check size={12} />
-            {completedHabitIds.size} of {habits.length} habits completed
-          </p>
-        </div>
-      </div>
+      <StatsCard />
 
       {isAdding && (
         <form onSubmit={handleAdd} className="animate-in slide-in-from-top-4 fade-in duration-300">

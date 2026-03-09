@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Calendar, CheckSquare, Settings } from 'lucide-react';
+import { Calendar, CheckSquare, Settings, ListTodo } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface LayoutProps {
@@ -36,7 +36,8 @@ function BottomNav() {
   const location = useLocation();
   
   const navItems = [
-    { path: '/', label: 'Today', icon: CheckSquare },
+    { path: '/', label: 'Habits', icon: CheckSquare },
+    { path: '/todos', label: 'Todos', icon: ListTodo },
     { path: '/stats', label: 'Stats', icon: Calendar },
     { path: '/settings', label: 'Settings', icon: Settings },
   ];

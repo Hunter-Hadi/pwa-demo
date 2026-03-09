@@ -14,3 +14,10 @@ export interface Log {
   status: 1 | 0;        // 1: 完成, 0: 未完成 (默认不存0，只存1)
   timestamp: number;    // 打卡具体时间
 }
+
+export interface Todo {
+  id?: number;
+  title: string;
+  completed: 0 | 1;     // 1: 完成, 0: 未完成
+  created_at: number;
+}
